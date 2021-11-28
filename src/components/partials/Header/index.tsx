@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { isLogged } from "../../../helpers/AuthHandler";
 
 export default function Header() {
-  let logged = false; //isLogged();
+  let logged = isLogged();
 
   return (
     <HeaderArea>

@@ -1,8 +1,14 @@
 import { PageArea } from "./styled";
-import { PageContainer, PageTitle } from ".././../components/MainComponent";
+import {
+  ErrorMessage,
+  PageContainer,
+  PageTitle,
+} from ".././../components/MainComponent";
 import { useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
 import { doLogin } from "../../helpers/AuthHandler";
+
+//http://alunos.b7web.com.br:501
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -17,18 +23,23 @@ export default function Signin() {
 
     const json: any = await OlxApi.login(email, password);
 
+    console.log("response: ", json);
+
     if (json.error) {
       setError(json.error);
     } else {
       doLogin(json.token, remember);
       window.location.href = "/";
     }
+
+    setDisabled(false);
   };
 
   return (
     <PageContainer>
       <PageTitle>Login</PageTitle>
       <PageArea>
+        {error && <ErrorMessage> {error} </ErrorMessage>}
         <form onSubmit={handleSubmit}>
           <label className="area">
             <div className="area--title">E-mail</div>
@@ -37,6 +48,7 @@ export default function Signin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
+                required
                 disabled={disabled}
               ></input>
             </div>
@@ -48,6 +60,7 @@ export default function Signin() {
               <input
                 type="password"
                 value={password}
+                required
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={disabled}
               ></input>
@@ -61,7 +74,7 @@ export default function Signin() {
                 className="check-box"
                 disabled={disabled}
                 checked={remember}
-                onClick={() => setRemember(!remember)}
+                onChange={() => setRemember(!remember)}
                 type="checkbox"
               ></input>
               <span>Lembrar? </span>
