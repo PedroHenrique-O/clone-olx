@@ -23,6 +23,7 @@ export default function Signin() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setDisabled(true);
+    setError("");
 
     const json: any = await OlxApi.login(email, password);
 

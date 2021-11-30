@@ -2,9 +2,11 @@ import Cookies from "js-cookie";
 import qs from "qs";
 
 type Body = {
+  name?: string;
   email: string;
   token?: string;
   password: string;
+  state?: string;
 };
 
 const BASEAPI = "http://alunos.b7web.com.br:501";
@@ -64,5 +66,26 @@ const OlxApi = {
 
     return json;
   },
+
+  getState: async () => {
+    const json = await apiFetchGet("/states");
+    return json.states;
+  },
+
+  register: async (
+    name: string,
+    password: string,
+    stateLoc: string,
+    email: string
+  ) => {
+    const json = await apiFetchPost("/user/signup", {
+      name,
+      password,
+      state: stateLoc,
+      email,
+    });
+    return json;
+  },
 };
+
 export default OlxApi;
