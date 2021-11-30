@@ -86,6 +86,11 @@ const OlxApi = {
     });
     return json;
   },
+
+  getCatogories: async () => {
+    const json = await apiFetchGet("/categories");
+    return json.categories;
+  },
 };
 
 export default OlxApi;

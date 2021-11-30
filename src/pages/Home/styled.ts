@@ -45,4 +45,26 @@ export const SearchArea = styled.div`
       }
     }
   }
+
+  .categoryList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    .categoryItem {
+      width: 25%;
+      display: flex;
+      align-items: center;
+      height: 50px;
+      text-decoration: none;
+      margin-bottom: 10px;
+      &:hover {
+        color: #999;
+      }
+      img {
+        width: 45px;
+        height: 45px;
+        margin-right: 10px;
+      }
+    }
+  }
 `;

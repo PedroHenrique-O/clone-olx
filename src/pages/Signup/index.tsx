@@ -12,8 +12,8 @@ import { doLogin } from "../../helpers/AuthHandler";
 
 //http://alunos.b7web.com.br:501
 
-type StateList = {
-  _id: string;
+export type StateList = {
+  _id?: string;
   name: string;
 };
 
@@ -95,12 +95,11 @@ export default function Signup() {
                 value={stateLoc}
                 onChange={(e) => setStateLoc(e.target.value)}
               >
-                {stateList &&
-                  stateList.map((item, key) => (
-                    <option key={key} value={item._id}>
-                      {item.name}
-                    </option>
-                  ))}
+                {stateList?.map((item, key) => (
+                  <option key={key} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
             </div>
           </label>
