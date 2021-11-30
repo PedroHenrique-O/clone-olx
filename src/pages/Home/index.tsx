@@ -1,13 +1,24 @@
 import { PageArea, SearchArea } from "./styled";
 import { PageContainer } from ".././../components/MainComponent";
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
 import { StateList } from "../../pages/Signup/index";
 import { Link } from "react-router-dom";
+import { AdItem } from "../../components/partials/AdItem";
+
+export type Ad = {
+  id?: string;
+  title?: string;
+  price?: number;
+  priceNegotiable?: boolean;
+  image?: string;
+};
 
 export default function Home() {
   const [stateList, setStateList] = useState<StateList[]>();
   const [category, setCategory] = useState<any[]>();
+  const [adList, setAdList] = useState<Ad[]>();
+  console.log("state", adList);
 
   useEffect(() => {
     const getStates = async () => {
@@ -24,7 +35,21 @@ export default function Home() {
       setCategory(category);
     };
     getCatogories();
-    console.log("retorno", category);
+    //console.log("retorno", category);
+  }, []);
+
+  useEffect(() => {
+    const getRecentAd = async () => {
+      const ad = await OlxApi.getAds({
+        sort: "desc",
+        limit: 8,
+      });
+      console.log("func", ad);
+
+      setAdList(ad);
+    };
+    getRecentAd();
+    //console.log("retorno", category);
   }, []);
   return (
     <>
@@ -59,7 +84,26 @@ export default function Home() {
       </SearchArea>
 
       <PageContainer>
-        <PageArea>. . .</PageArea>
+        <PageArea>
+          <h2> Anúncios Recentes </h2>
+          <div className="list">
+            {adList?.map((item, index) => (
+              <AdItem key={index} data={item} />
+            ))}
+          </div>
+          <Link to="/ads" className="seeAllLink">
+            Ver todos
+          </Link>
+          <hr />
+          <p>
+            Lorem ipsum dolor sit amet. In atque deleniti aut perspiciatis quia
+            aut labore dolor cum numquam ipsa. Sed similique ea fuga magnam aut
+            atque perferendis hic similique vero. Ea pariatur ipsa sit saepe
+            atque est numquam omnis in ullam porro At expedita aliquam? Non
+            laudantium aspernatur a reprehenderit amet sed odit voluptatum qui
+            consequatur eaque et saepe ipsam?
+          </p>
+        </PageArea>
       </PageContainer>
     </>
   );

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const PageArea = styled.div``;
 export const SearchArea = styled.div`
   background-color: #ddd;
   border-bottom: #ccc;
+
   padding: 20px, 0px;
 
   .searchBox {
+    margin-top: 20px;
     background-color: #98bb3c;
     padding: 20px 15px;
     border-radius: 5px;
@@ -66,5 +67,22 @@ export const SearchArea = styled.div`
         margin-right: 10px;
       }
     }
+  }
+`;
+
+export const PageArea = styled.div`
+  h2 {
+    font-size: 20px;
+  }
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .seeAllLink {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
   }
 `;
