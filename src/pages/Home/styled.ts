@@ -1,63 +1,47 @@
 import styled from "styled-components";
 
-export const PageArea = styled.div`
-  form {
-    background-color: #fff;
-    border-radius: 3px;
-    padding: 10px;
-    box-shadow: 1px 3px 6px #999;
-    padding-bottom: 15px;
+export const PageArea = styled.div``;
+export const SearchArea = styled.div`
+  background-color: #ddd;
+  border-bottom: #ccc;
+  padding: 20px, 0px;
 
-    .area {
+  .searchBox {
+    background-color: #98bb3c;
+    padding: 20px 15px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    form {
+      flex: 1;
       display: flex;
-      align-items: center;
-      padding: 10px;
-      max-width: 500px;
 
-      .area--title {
-        width: 200px;
-        text-align: right;
-        padding-right: 20px;
-        font-weight: bold;
-        font-size: 18px;
-      }
-      .area--input {
-        flex: 1;
-        input {
-          width: 100%;
-          font-size: 14px;
-          padding: 5px;
-          border: 1px solid #ddd;
-          outline: 0;
-          transition: all ease 0.6s;
-          &:focus {
-            border: 1px solid #333;
-            color: #333;
-          }
-        }
-        .check-box {
-          width: auto;
-        }
-        span {
-          font-weight: bold;
-          padding-left: 3px;
-        }
-      }
-
-      button {
-        background-color: #0089ff;
+      input,
+      select {
+        height: 40px;
         border: 0;
-        outline: 0;
-        padding: 5px 10px;
-        cursor: pointer;
-
-        color: #fff;
-        border-radius: 4px;
+        border-radius: 5px;
         font-size: 15px;
+        color: black;
+        outline: 0;
+        margin-right: 20px;
+      }
+      input {
+        flex: 1;
+        padding: 0 10px;
+      }
+      select {
+        width: 100px;
+      }
+      button {
+        background-color: #49aeef;
+        font-size: 15;
+        border: 0;
+        border-radius: 5px;
+        color: #fff;
+        height: 40px;
+        padding: 0 20px;
         cursor: pointer;
-        &:hover {
-          background-color: #006fce;
-        }
       }
     }
   }
