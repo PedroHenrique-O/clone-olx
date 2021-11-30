@@ -7,10 +7,13 @@ import {
 import { useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
 import { doLogin } from "../../helpers/AuthHandler";
+// import { useNavigate } from "react-router-dom";
 
 //http://alunos.b7web.com.br:501
 
 export default function Signin() {
+  //   let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -23,12 +26,15 @@ export default function Signin() {
 
     const json: any = await OlxApi.login(email, password);
 
-    console.log("response: ", json);
+    console.log(json);
 
     if (json.error) {
       setError(json.error);
     } else {
       doLogin(json.token, remember);
+
+      //navigate("/");
+
       window.location.href = "/";
     }
 
