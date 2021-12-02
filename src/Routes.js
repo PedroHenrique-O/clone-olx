@@ -5,6 +5,8 @@ import NotFound from "./pages/NotFound";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import AdPage from "./pages/AdPage";
+import SellPage from "./pages/SellPage";
+import AllPage from "./pages/AllPage";
 import RouteHandler from "./components/RouteHandler";
 
 const Routers = () => {
@@ -16,12 +18,13 @@ const Routers = () => {
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/ad/:id" element={<AdPage />} />
+      <Route path="/ads" element={<AllPage />} />
 
       <Route
-        path="/post-and-ad"
+        path="/post-an-ad"
         element={
           <RouteHandler privateRoute>
-            <About />
+            <SellPage />
           </RouteHandler>
         }
       />

@@ -18,7 +18,9 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-slideshow-image": "^3.6.0",
+    "react-text-mask": "^5.4.3",
     "redux": "^4.1.2",
+    "text-mask-addons": "^3.8.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -49,6 +51,7 @@
   "devDependencies": {
     "@types/js-cookie": "^3.0.1",
     "@types/qs": "^6.9.7",
+    "@types/react-text-mask": "^5.4.10",
     "@types/styled-components": "^5.1.15",
     "styled-components": "^5.3.3"
   }
