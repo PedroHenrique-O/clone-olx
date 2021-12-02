@@ -49,6 +49,7 @@ export const SearchArea = styled.div`
 
   .categoryList {
     display: flex;
+
     flex-wrap: wrap;
     margin-top: 20px;
     .categoryItem {
@@ -76,6 +77,8 @@ export const PageArea = styled.div`
   }
   .list {
     display: flex;
+
+    //display: flex;
     flex-wrap: wrap;
   }
   .seeAllLink {

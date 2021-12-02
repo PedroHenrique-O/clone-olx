@@ -2,28 +2,42 @@ import { Item } from "./style";
 import { Link } from "react-router-dom";
 
 export type Ad = {
-  id: string;
-  title: string;
+  id?: string;
+  title?: string;
   price?: number;
   priceNegotiable?: boolean;
-  image: string;
+  image?: string;
 };
+// { id, title, price, priceNegotiable, image }: Ad
 
-export function AdItem(
-  data: any
+export function AdItem({ id, title, price, image, priceNegotiable }: Ad) {
+  let priceStatus = "";
+  if (priceNegotiable) {
+    priceStatus = "Preço negociável";
+  } else {
+    priceStatus = `R$ ${price}`;
+  }
 
-  // { id, title, price, priceNegotiable, image }: Ad
-) {
+  let newImage;
+  //teste
+  if (image === "http://alunos.b7web.com.br:501/media/default.jpg") {
+    newImage =
+      "https://www.kenyons.com/wp-content/uploads/2017/04/default-image.jpg";
+  } else {
+    newImage = image;
+  }
+  //teste
+
   return (
-    <Item className="adItem">
-      <Link to={`/ad/${data.id}`}>
+    <Item>
+      <Link to={`/ad/${id}`}>
         <div className="itemImage">
-          <img src={data.image} alt={data.title} />
+          <img src={newImage} alt={title} />
         </div>
 
-        <div className="itemName">{data.title}</div>
+        <div className="itemName">{title}</div>
 
-        <div className="itemPrice">...</div>
+        <div className="itemPrice"> {priceStatus}</div>
       </Link>
     </Item>
   );

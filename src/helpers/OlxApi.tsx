@@ -2,11 +2,13 @@ import Cookies from "js-cookie";
 import qs from "qs";
 
 type Body = {
+  id?: string;
   name?: string;
-  email: string;
+  email?: string;
   token?: string;
-  password: string;
+  password?: string;
   state?: string;
+  other?: boolean;
 };
 
 const BASEAPI = "http://alunos.b7web.com.br:501";
@@ -95,6 +97,12 @@ const OlxApi = {
   getAds: async (options: any) => {
     const json = await apiFetchGet("/ad/list", options);
     return json.ads;
+  },
+
+  getAd: async (id: string, other: boolean = false) => {
+    const json = await apiFetchGet("/ad/item", { id, other });
+
+    return json;
   },
 };
 

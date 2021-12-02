@@ -1,6 +1,6 @@
 import { PageArea, SearchArea } from "./styled";
 import { PageContainer } from ".././../components/MainComponent";
-import { Children, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
 import { StateList } from "../../pages/Signup/index";
 import { Link } from "react-router-dom";
@@ -88,7 +88,7 @@ export default function Home() {
           <h2> Anúncios Recentes </h2>
           <div className="list">
             {adList?.map((item, index) => (
-              <AdItem key={index} data={item} />
+              <AdItem key={index} {...item} />
             ))}
           </div>
           <Link to="/ads" className="seeAllLink">
