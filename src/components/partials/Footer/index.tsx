@@ -1,5 +1,11 @@
 import { FooterArea } from "./styled";
 
 export default function Footer() {
-  return <FooterArea>...</FooterArea>;
+  return (
+    <FooterArea>
+      {" "}
+      Todos os direitos reservados <br />
+      Powered by: Coutter
+    </FooterArea>
+  );
 }
