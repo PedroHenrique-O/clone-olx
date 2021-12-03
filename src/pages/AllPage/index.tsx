@@ -158,18 +158,20 @@ export default function AllPage() {
 
             <div className="filterName">
               Categoria
-              {category?.map((item, index) => (
-                <li
-                  onClick={() => setCat(item.slug)}
-                  className={
-                    cat === item.slug ? "categoryItem active" : "categoryItem"
-                  }
-                  key={index}
-                >
-                  <img src={item.img} alt="" />
-                  <span>{item.name}</span>
-                </li>
-              ))}
+              <ul>
+                {category?.map((item, index) => (
+                  <li
+                    onClick={() => setCat(item.slug)}
+                    className={
+                      cat === item.slug ? "categoryItem active" : "categoryItem"
+                    }
+                    key={index}
+                  >
+                    <img src={item.img} alt="" />
+                    <span>{item.name}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <ul></ul>

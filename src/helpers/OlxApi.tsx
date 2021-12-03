@@ -98,6 +98,15 @@ const OlxApi = {
     return json.states;
   },
 
+  userInfo: async () => {
+    const json = await apiFetchGet("/user/me");
+    return json;
+  },
+  changeUserInfo: async () => {
+    const json = await apiFetchGet("/user/me");
+    return json;
+  },
+
   register: async (
     name: string,
     password: string,

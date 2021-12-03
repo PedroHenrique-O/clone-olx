@@ -105,4 +105,28 @@ export const PageArea = styled.div`
       //margin-right: 3px;
     }
   }
+  @media (max-width: 600px) {
+    & {
+      flex-direction: column;
+    }
+    .leftS {
+      width: auto;
+      margin: 10px;
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          width: 50%;
+        }
+      }
+    }
+    .rightS {
+      margin: 10px;
+
+      .list {
+        width: 150%;
+      }
+    }
+  }
 `;

@@ -5,6 +5,7 @@ import OlxApi from "../../helpers/OlxApi";
 import { StateList } from "../../pages/Signup/index";
 import { Link } from "react-router-dom";
 import { AdItem } from "../../components/partials/AdItem";
+import { userInfo } from "os";
 
 export type Ad = {
   id?: string;
@@ -18,7 +19,18 @@ export default function Home() {
   const [stateList, setStateList] = useState<StateList[]>();
   const [category, setCategory] = useState<any[]>();
   const [adList, setAdList] = useState<Ad[]>();
+  const [userInfo, setUserInfo] = useState<any[]>();
   console.log("state", adList);
+  console.log("userInfo: ", userInfo);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const json = await OlxApi.userInfo();
+      //console.log("userInfoo", json);
+      setUserInfo(json);
+    };
+    getUserInfo();
+  }, []);
 
   useEffect(() => {
     const getStates = async () => {
@@ -46,7 +58,7 @@ export default function Home() {
       });
       console.log("func", ad);
 
-      setAdList(ad);
+      setAdList(ad.ads);
     };
     getRecentAd();
     //console.log("retorno", category);

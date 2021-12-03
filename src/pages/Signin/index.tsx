@@ -26,6 +26,7 @@ export default function Signin() {
     setError("");
 
     const json: any = await OlxApi.login(email, password);
+    console.log(json.token);
 
     console.log(json);
 
