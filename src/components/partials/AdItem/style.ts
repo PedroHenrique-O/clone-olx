@@ -25,6 +25,9 @@ export const Item = styled.div`
     .itemName {
       font-weight: bold;
     }
+    /* .container--list {
+      width: 33%;
+    } */
   }
 `;
 

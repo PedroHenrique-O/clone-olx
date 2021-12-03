@@ -1,11 +1,10 @@
 import { PageArea } from "./styled";
 import { PageContainer } from ".././../components/MainComponent";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
-
 import { StateList } from "../../pages/Signup/index";
 import { useLocation, useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+
 import { AdItem } from "../../components/partials/AdItem";
 import { clearTimeout } from "timers";
 
@@ -18,8 +17,19 @@ export type Ad = {
 };
 
 export default function AllPage() {
+  const [stateList, setStateList] = useState<StateList[]>();
+  const [category, setCategory] = useState<any[]>();
+  const [adList, setAdList] = useState<Ad[]>();
+  const [opacity, setOpacity] = useState(1);
+  const [adsTotal, setAdsTotal] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  console.log("alist", adList);
+  console.log("tota", adsTotal);
   let time: NodeJS.Timeout;
-  const timeout = useRef();
+  // const timeout = useRef();
 
   const navigation = useNavigate();
 
@@ -36,29 +46,40 @@ export default function AllPage() {
     query.get("state") != null ? query.get("state") : ""
   );
 
-  const [stateList, setStateList] = useState<StateList[]>();
-  const [category, setCategory] = useState<any[]>();
-  const [adList, setAdList] = useState<Ad[]>();
-  const [opacity, setOpacity] = useState(1);
-
-  const [loading, setLoading] = useState(true);
-
-  console.log("state", stateList);
-  console.log("category", category);
-
   const getAdsList = async () => {
     setLoading(true);
+
+    let offset = (currentPage - 1) * 2;
+
     const json = await OlxApi.getAds({
       sort: "desc",
-      limit: 8,
+      limit: 12,
       q,
       cat,
       state,
+      offset,
     });
-    setAdList(json);
+    setAdList(json.ads);
+    setAdsTotal(json.total);
     setOpacity(1);
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (adList?.length) {
+      setPageCount(Math.ceil(adsTotal / adList!.length));
+    } else {
+      setPageCount(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adsTotal]);
+
+  useEffect(() => {
+    setOpacity(0.3);
+    getAdsList();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   useEffect(() => {
     let queryString = [];
@@ -78,6 +99,7 @@ export default function AllPage() {
     if (time) {
       clearTimeout(time);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     time = setTimeout(getAdsList, 2000);
     setOpacity(0.3);
     getAdsList();
@@ -98,9 +120,14 @@ export default function AllPage() {
       setCategory(cat);
     };
     getCatogories();
-
-    //console.log("retorno", category);
+    setCurrentPage(1);
   }, []);
+
+  let pagination: any[] = [];
+
+  for (let i = 0; i <= pageCount; i++) {
+    pagination.push(i);
+  }
 
   return (
     <PageContainer>
@@ -150,7 +177,9 @@ export default function AllPage() {
         </div>
         <div className="rightS">
           <h2>Resultados:</h2>
-          {loading && <div className="listWarning"> Carregando... </div>}
+          {loading && adList?.length === 0 && (
+            <div className="listWarning"> Carregando... </div>
+          )}
 
           {!loading && adList?.length === 0 && (
             <div className="listWarning"> Não encontrado... </div>
@@ -159,6 +188,21 @@ export default function AllPage() {
           <div className="list" style={{ opacity: opacity }}>
             {adList?.map((item: any, index: any) => (
               <AdItem className="q" key={index} {...item} />
+            ))}
+          </div>
+
+          <div className="pagination">
+            {pagination.map((item: any, index: any) => (
+              <div
+                onClick={() => setCurrentPage(item)}
+                className={
+                  item === currentPage ? "pageItem active" : "pageItem"
+                }
+                key={index}
+              >
+                {" "}
+                {item}
+              </div>
             ))}
           </div>
         </div>

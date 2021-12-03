@@ -69,10 +69,40 @@ export const PageArea = styled.div`
       display: flex;
       flex-wrap: wrap;
       width: 33%;
+      /* .q {
+        width: 33%;
+      } */
 
-      .adItem {
-        width: 13%;
+      .container--list {
+        width: 33%;
+        display: flex;
+        flex-wrap: wrap;
       }
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      //margin: 10px, 0;
+
+      .pageItem {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover {
+          border: 1px solid #999;
+        }
+      }
+      .active {
+        background-color: #ccc;
+      }
+      //margin-right: 3px;
     }
   }
 `;
