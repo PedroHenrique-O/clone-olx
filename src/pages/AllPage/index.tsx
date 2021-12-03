@@ -2,6 +2,7 @@ import { PageArea } from "./styled";
 import { PageContainer } from ".././../components/MainComponent";
 import { useEffect, useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
+
 import { StateList } from "../../pages/Signup/index";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -17,6 +18,19 @@ export type Ad = {
 
 export default function AllPage() {
   //alert(useLocation().search);
+
+  const useQueryString = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const query = useQueryString();
+
+  const [q, setQ] = useState<any>(query.get("q") != null ? query.get("q") : "");
+  const [cat, setCat] = useState<any>(
+    query.get("cat") != null ? query.get("cat") : ""
+  );
+  const [state, setState] = useState<any>(
+    query.get("state") != null ? query.get("state") : ""
+  );
 
   const [stateList, setStateList] = useState<StateList[]>();
   const [category, setCategory] = useState<any[]>();
@@ -61,9 +75,19 @@ export default function AllPage() {
       <PageArea>
         <div className="leftS">
           <form method="GET">
-            <input placeholder="O que você procura?" type="text" name="q" />
+            <input
+              value={q}
+              placeholder="O que você procura?"
+              type="text"
+              name="q"
+              onChange={(e) => setQ(e.target.value)}
+            />
             <div className="filterName"> Estado:</div>
-            <select name="estado">
+            <select
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              name="estado"
+            >
               {/* /<option></option> */}
               {stateList?.map((item, index) => (
                 <option key={index} value={item.name}>
@@ -75,7 +99,13 @@ export default function AllPage() {
             <div className="filterName">
               Categoria
               {category?.map((item, index) => (
-                <li className="categoryItem" key={index}>
+                <li
+                  onClick={() => setCat(item.slug)}
+                  className={
+                    cat === item.slug ? "categoryItem active" : "categoryItem"
+                  }
+                  key={index}
+                >
                   <img src={item.img} alt="" />
                   <span>{item.name}</span>
                 </li>
