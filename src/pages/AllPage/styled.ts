@@ -52,5 +52,27 @@ export const PageArea = styled.div`
   }
   .rightS {
     flex: 1;
+    //margin-top: 0px;
+    //flex-wrap: 33%;
+    font-size: 18px;
+    h2 {
+      margin-top: 0px;
+    }
+    .listWarning {
+      padding: 30px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+      width: 33%;
+
+      .adItem {
+        width: 13%;
+      }
+    }
   }
 `;

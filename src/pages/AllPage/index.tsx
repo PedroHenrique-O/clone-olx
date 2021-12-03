@@ -1,12 +1,13 @@
 import { PageArea } from "./styled";
 import { PageContainer } from ".././../components/MainComponent";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import OlxApi from "../../helpers/OlxApi";
 
 import { StateList } from "../../pages/Signup/index";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { AdItem } from "../../components/partials/AdItem";
+import { clearTimeout } from "timers";
 
 export type Ad = {
   id?: string;
@@ -17,7 +18,10 @@ export type Ad = {
 };
 
 export default function AllPage() {
-  //alert(useLocation().search);
+  let time: NodeJS.Timeout;
+  const timeout = useRef();
+
+  const navigation = useNavigate();
 
   const useQueryString = () => {
     return new URLSearchParams(useLocation().search);
@@ -35,8 +39,49 @@ export default function AllPage() {
   const [stateList, setStateList] = useState<StateList[]>();
   const [category, setCategory] = useState<any[]>();
   const [adList, setAdList] = useState<Ad[]>();
+  const [opacity, setOpacity] = useState(1);
+
+  const [loading, setLoading] = useState(true);
+
   console.log("state", stateList);
   console.log("category", category);
+
+  const getAdsList = async () => {
+    setLoading(true);
+    const json = await OlxApi.getAds({
+      sort: "desc",
+      limit: 8,
+      q,
+      cat,
+      state,
+    });
+    setAdList(json);
+    setOpacity(1);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    let queryString = [];
+    if (q) {
+      queryString.push(`q=${q}`);
+    }
+    if (cat) {
+      queryString.push(`cat=${cat}`);
+    }
+    if (state) {
+      queryString.push(`state=${state}`);
+    }
+
+    navigation({
+      search: `?${queryString.join("&")}`,
+    });
+    if (time) {
+      clearTimeout(time);
+    }
+    time = setTimeout(getAdsList, 2000);
+    setOpacity(0.3);
+    getAdsList();
+  }, [q, cat, state]);
 
   useEffect(() => {
     const getStates = async () => {
@@ -57,19 +102,6 @@ export default function AllPage() {
     //console.log("retorno", category);
   }, []);
 
-  useEffect(() => {
-    const getRecentAd = async () => {
-      const ad = await OlxApi.getAds({
-        sort: "desc",
-        limit: 8,
-      });
-      console.log("func", ad);
-
-      setAdList(ad);
-    };
-    getRecentAd();
-    //console.log("retorno", category);
-  }, []);
   return (
     <PageContainer>
       <PageArea>
@@ -88,6 +120,7 @@ export default function AllPage() {
               onChange={(e) => setState(e.target.value)}
               name="estado"
             >
+              <option> </option>
               {/* /<option></option> */}
               {stateList?.map((item, index) => (
                 <option key={index} value={item.name}>
@@ -115,7 +148,20 @@ export default function AllPage() {
             <ul></ul>
           </form>
         </div>
-        <div className="rightS">resto</div>
+        <div className="rightS">
+          <h2>Resultados:</h2>
+          {loading && <div className="listWarning"> Carregando... </div>}
+
+          {!loading && adList?.length === 0 && (
+            <div className="listWarning"> Não encontrado... </div>
+          )}
+
+          <div className="list" style={{ opacity: opacity }}>
+            {adList?.map((item: any, index: any) => (
+              <AdItem className="q" key={index} {...item} />
+            ))}
+          </div>
+        </div>
       </PageArea>
     </PageContainer>
   );
