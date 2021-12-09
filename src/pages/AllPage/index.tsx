@@ -187,7 +187,7 @@ export default function AllPage() {
             <div className="listWarning"> Não encontrado... </div>
           )}
 
-          <div className="list" style={{ opacity: opacity }}>
+          <div className="item--list" style={{ opacity: opacity }}>
             {adList?.map((item: any, index: any) => (
               <AdItem className="q" key={index} {...item} />
             ))}

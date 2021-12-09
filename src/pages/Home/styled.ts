@@ -90,27 +90,43 @@ export const SearchArea = styled.div`
       .categoryList .categoryItem {
         width: 50%;
         padding: 10px;
-        //flex-direction: column;
+        /* display: flex;
+        flex-direction: column; */
       }
     }
   }
 `;
 
+export const FakeDiv = styled.div`
+  background-color: #999;
+  height: 20px;
+  animation: fadeIn 5s linear infinite;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+`;
+
 export const PageArea = styled.div`
+  .item--list {
+  }
   h2 {
     font-size: 20px;
-  }
-  .list {
-    display: flex;
-
-    //display: flex;
-    flex-wrap: wrap;
   }
   .seeAllLink {
     color: #000;
     text-decoration: none;
     font-weight: bold;
-    display: inline-block;
+
+    /* display: inline-block; */
     margin-top: 10px;
   }
   @media (max-width: 600px) {
@@ -119,7 +135,7 @@ export const PageArea = styled.div`
     }
     h2 {
     }
-    .list {
+    .item--list {
       width: 100%;
       //flex-wrap: none;
     }
