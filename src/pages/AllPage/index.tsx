@@ -189,23 +189,24 @@ export default function AllPage() {
 
           <div className="item--list" style={{ opacity: opacity }}>
             {adList?.map((item: any, index: any) => (
-              <AdItem className="q" key={index} {...item} />
+              <AdItem key={index} {...item} />
             ))}
-          </div>
+            {/* </div> */}
 
-          <div className="pagination">
-            {pagination.map((item: any, index: any) => (
-              <div
-                onClick={() => setCurrentPage(item)}
-                className={
-                  item === currentPage ? "pageItem active" : "pageItem"
-                }
-                key={index}
-              >
-                {" "}
-                {item}
-              </div>
-            ))}
+            <div className="pagination">
+              {pagination.map((item: any, index: any) => (
+                <div
+                  onClick={() => setCurrentPage(item)}
+                  className={
+                    item === currentPage ? "pageItem active" : "pageItem"
+                  }
+                  key={index}
+                >
+                  {" "}
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </PageArea>

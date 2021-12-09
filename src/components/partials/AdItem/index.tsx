@@ -29,7 +29,7 @@ export function AdItem({ id, title, price, image, priceNegotiable }: Ad) {
   //teste
 
   return (
-    <Item>
+    <Item className="aditem">
       <Link to={`/ad/${id}`}>
         <div className="itemImage">
           <img src={newImage} alt={title} />

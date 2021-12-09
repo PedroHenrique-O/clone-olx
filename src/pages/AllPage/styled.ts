@@ -54,7 +54,7 @@ export const PageArea = styled.div`
     flex: 1;
     //margin-top: 0px;
     //flex-wrap: 33%;
-    font-size: 18px;
+    /* font-size: 18px; */
     h2 {
       margin-top: 0px;
     }
@@ -65,46 +65,58 @@ export const PageArea = styled.div`
       font-size: 20px;
     }
 
-    .list {
+    .item--list {
       display: flex;
       flex-wrap: wrap;
-      width: 33%;
-      /* .q {
-        width: 33%;
-      } */
 
-      .container--list {
+      .aditem {
         width: 33%;
-        display: flex;
-        flex-wrap: wrap;
       }
-    }
 
-    .pagination {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      //margin: 10px, 0;
+      /* .container--list {
+        width: 33%;
+         display: flex;
+        flex-wrap: wrap; 
+      } */
+      //} velho
 
-      .pageItem {
-        width: 30px;
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        //margin: 10px, 0;
+
+        .pageItem {
+          /* width: 30px;
         height: 30px;
         border: 1px solid #000;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 14px;
-        cursor: pointer;
-        &:hover {
-          border: 1px solid #999;
+        font-size: 14px; */
+
+          width: 30px;
+          height: 30px;
+          display: flex;
+          border: 1px solid #000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          margin-right: 5px;
+          cursor: pointer;
+          &:hover {
+            border: 1px solid #999;
+          }
         }
+        .active {
+          background-color: #ccc;
+        }
+        //margin-right: 3px;
       }
-      .active {
-        background-color: #ccc;
-      }
-      //margin-right: 3px;
     }
-  }
+  } //novo
   @media (max-width: 600px) {
     & {
       flex-direction: column;

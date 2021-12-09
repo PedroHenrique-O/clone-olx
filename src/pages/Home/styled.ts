@@ -117,10 +117,19 @@ export const FakeDiv = styled.div`
 
 export const PageArea = styled.div`
   .item--list {
+    display: flex;
+    flex-wrap: wrap;
+    .aditem {
+      width: 25%;
+    }
   }
   h2 {
     font-size: 20px;
   }
+  .list .aditem {
+    width: 10px;
+  }
+
   .seeAllLink {
     color: #000;
     text-decoration: none;
